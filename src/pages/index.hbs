@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div class="page-layout">
+    <!-- Form Section -->
+    <form action="/analyze" method="POST">
+      <input type="text" name="title" placeholder="Enter a title">
+      <textarea name="urls" placeholder="Enter URLs, one per line" required></textarea>
+
+      <label for="container">Select Container:</label>
+      <select name="container" id="container" required>
+        <option value="1">UV</option>
+        <option value="2">Ram</option>
+        <option value="3">Misc</option>
+      </select>
+      
+      <button type="submit">Check URLs</button>
+    </form>
+
+    <!-- Containers Section -->
+    <div class="container">
+  <h2>Ultraviolet</h2>
+  {{#each container1}}
+    <div class="entry">
+      <a href="{{this.url}}" target="_blank">{{this.title}}</a> - Status: {{this.status}}
+      {{#if this.error}}<span style="color: red;">Error: {{this.error}}</span>{{/if}} 
+      <form action="/delete" method="POST" style="display:inline;">
+        <input type="hidden" name="title" value="{{this.title}}">
+        <button type="submit">Del</button>
+      </form>
+    </div>
+  {{/each}}
+</div>
+
+<div class="container">
+  <h2>Rammerhead</h2>
+  {{#each container2}}
+    <div class="entry">
+      <a href="{{this.url}}" target="_blank">{{this.title}}</a> - Status: {{this.status}}
+      {{#if this.error}}<span style="color: red;">Error: {{this.error}}</span>{{/if}} 
+      <form action="/delete" method="POST" style="display:inline;">
+        <input type="hidden" name="title" value="{{this.title}}">
+        <button type="submit">Del</button>
+      </form>
+    </div>
+  {{/each}}
+</div>
+
+<div class="container">
+  <h2>Misc</h2>
+  {{#each container3}}
+    <div class="entry">
+      <a href="{{this.url}}" target="_blank">{{this.title}}</a> - Status: {{this.status}}
+      {{#if this.error}}<span style="color: red;">Error: {{this.error}}</span>{{/if}} 
+      <form action="/delete" method="POST" style="display:inline;">
+        <input type="hidden" name="title" value="{{this.title}}">
+        <button type="submit">Del</button>
+      </form>
+    </div>
+  {{/each}}
+</div>
+
+  </div>
+</body>
+</html>
